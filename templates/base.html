@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking APP</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Головна</a></li>
+                <li><a href="#">Про нас</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">Мої бронювання</a></li>
+                {% endif %}
+                <li>
+                    {% if user.is_authenticated %}
+                        <li><a href="#">Вийти</a></li>
+                    {% else %}
+                        <li><a href="#">Увійти</a></li>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <footer></footer>
+</body>
+</html>
