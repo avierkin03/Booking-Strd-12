@@ -4,4 +4,5 @@ from booking import views
 urlpatterns = [
     path("", views.rooms_list, name="main"),
     path("/room/<int:room_id>", views.room_detail, name="room_detail"),
+    path("/bookings/", views.user_bookings, name="user_bookings")
 ]

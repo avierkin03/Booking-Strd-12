@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Ваші бронювання</h2>
+{% if bookings %}
+    <ul>
+        {% for booking in bookings%}
+            <li>
+                Номер {{ booking.room.number }} ({{ booking.room.category }})
+                з {{ booking.start_date }} по {{ booking.end_date }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>У вас немає бронювань.</p>
+{% endif %}
+{% endblock %}

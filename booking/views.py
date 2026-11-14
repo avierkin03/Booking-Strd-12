@@ -38,8 +38,34 @@ def rooms_list(request):
 
 # функція представлення сторінки з детальним описом кімнати
 def room_detail(request, room_id):
-    room = Room.objects.get(id = room_id)
-    context = {
-        "room": room
-    }
-    return render(request, template_name="room_detail.html", context=context)
+    if request.method == "GET":
+        room = Room.objects.get(id = room_id)
+        start_date = request.GET.get("start_date")
+        end_date = request.GET.get("end_date")
+        context = {
+            "room": room,
+            "start_date": start_date,
+            "end_date": end_date
+        }
+        return render(request, template_name="room_detail.html", context=context)
+    elif request.method == "POST":
+        room = Room.objects.get(id = room_id)
+        user = request.user
+        start_date = request.POST.get("start_date")
+        end_date = request.POST.get("end_date")
+
+        new_booking = Booking.objects.create(
+            user = user,
+            room = room,
+            start_date = start_date,
+            end_date = end_date
+        )
+
+        return render(request, "booking_success.html", context = {"new_booking": new_booking})
+
+
+# функція представлення сторінки з усіма зробленми бронюваннями користувача
+def user_bookings(request):
+    user = request.user
+    bookings = Booking.objects.filter(user = user).order_by('-start_date')
+    return render(request, "user_bookings.html", context = {"bookings": bookings})

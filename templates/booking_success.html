@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Бронювання успішно створено!</h2>
+<p>Номер: {{ new_booking.room.number }} - {{ new_booking.room.category }}</p>
+<p>Дати: з {{ new_booking.start_date }} по {{ new_booking.start_date }}</p>
+<p>Ціна: {{ new_booking.room.price }} грн.</p>
+<p><a href="{% url 'main' %}">Повернутися до пошуку</a></p>
+{% endblock %}
